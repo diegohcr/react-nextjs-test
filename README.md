@@ -24,7 +24,7 @@ This project implements an optimized Next.js 14 application that demonstrates ef
 ## Installation and Setup
 ```sh
 git clone https://github.com/diegohcr/react-nextjs-test.git
-cd <project-folder>
+cd react-nextjs-test
 npm install
 npm run dev
 ```
