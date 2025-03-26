@@ -1,36 +1,57 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Optimized Blog and Product Catalog Application
 
-## Getting Started
+## Overview
+This project implements an optimized Next.js 14 application that demonstrates efficient server-side rendering, client-side interactions, and performance optimizations.
 
-First, run the development server:
+## Tech Stack
+- Next.js 14
+- React 18
+- TypeScript 5, Tailwind CSS 3
+- Zustand 4
+- @tanstack/react-query 5
 
-```bash
+## Features
+### Story-001: Optimized Blog Application
+- Uses Next.js Server Components for efficient rendering.
+- Implements App Router for seamless client-side navigation.
+- Utilizes Zustand for state management (favoriting posts with localStorage persistence).
+
+### Story-002: Performant Product Catalog
+- Implements data fetching and caching with React Query.
+- Supports pagination and infinite scrolling for handling large datasets.
+- Applies performance optimizations such as code splitting and memoization.
+
+## Installation and Setup
+```sh
+git clone <repo-url>
+cd <project-folder>
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+```
+## Test
+```sh
+npm run test
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Build
+```sh
+npm run build
+npm start
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Application will be available at `http://localhost:3000`
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### State Management
+- Zustand is chosen for its lightweight and efficient state management capabilities, ensuring minimal re-renders.
+- React Query is used for data fetching, reducing redundant API calls and improving caching efficiency.
 
-## Learn More
+### Performance Optimizations
+- **Code Splitting:** Dynamically loads components to reduce initial page load time.
+- **Memoization:** Uses `useMemo` and `useCallback` to prevent unnecessary renders.
+- **Infinite Scrolling:** Fetches only required data dynamically to enhance UX and reduce payload size.
 
-To learn more about Next.js, take a look at the following resources:
+## How to Use
+- Navigate between `Blog` and `Catalog` using the header.
+- In the **Blog**, users can mark posts as favorites (stored persistently using Zustand + localStorage).
+- In the **Product Catalog**, users can browse products with infinite scrolling and cached data fetching.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
