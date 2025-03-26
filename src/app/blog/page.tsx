@@ -1,4 +1,3 @@
-// app/blog/page.tsx
 import PostList from '@/app/_components/PostList';
 
 export default function BlogPage() {
