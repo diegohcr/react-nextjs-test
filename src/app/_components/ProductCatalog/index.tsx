@@ -4,9 +4,17 @@ import { useInfiniteQuery } from '@tanstack/react-query';
 import React, { useRef, useCallback, memo } from 'react';
 import ProductItem from '../ProductItem';
 
+type Photo = {
+  albumId: number;
+  id: number;
+  title: string;
+  url: string;
+  thumbnailUrl: string;
+};
+
 const fetchProducts = async ({ pageParam = 1 }) => {
   const res = await fetch(
-    `https://jsonplaceholder.typicode.com/posts?_page=${pageParam}&_limit=10`,
+    `https://jsonplaceholder.typicode.com/photos?_page=${pageParam}&_limit=10`,
   );
   if (!res.ok) throw new Error('Failed to fetch products');
   return res.json();
@@ -21,7 +29,7 @@ const ProductCatalog = () => {
     hasNextPage,
     isFetchingNextPage,
   } = useInfiniteQuery({
-    queryKey: ['products'],
+    queryKey: ['photos'],
     queryFn: fetchProducts,
     initialPageParam: 1,
     getNextPageParam: (_lastPage, allPages) =>
@@ -44,27 +52,29 @@ const ProductCatalog = () => {
     [fetchNextPage, hasNextPage, isFetchingNextPage],
   );
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <div className="text-center p-6">Loading...</div>;
   if (error instanceof Error)
-    return <div>An error occurred: {error.message}</div>;
+    return (
+      <div className="text-destructive p-6">
+        An error occurred: {error.message}
+      </div>
+    );
 
   return (
-    <div className="max-w-4xl mx-auto p-6">
-      <h2 className="text-2xl font-bold mb-4">Product Catalog</h2>
-      <ul className="space-y-4">
-        {data?.pages.flat().map((product: { id: number; title: string }) => (
-          //   <li key={product.id} className="border p-4 rounded shadow">
-          //     <h3 className="text-xl font-semibold text-gray-800">
-          //       {product.title}
-          //     </h3>
-          //     <p className="text-gray-600">Lorem ipsum dolor sit amet.</p>
-          //   </li>
-          <ProductItem key={product.id} product={product} />
+    <div className="container mx-auto">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        {data?.pages.flat().map((photo: Photo) => (
+          <ProductItem key={photo.id} product={photo} />
         ))}
-      </ul>
+      </div>
 
-      {/* Elemento sentinela para ativar o carregamento automático */}
       <div ref={loadMoreRef} className="h-10" />
+
+      {isFetchingNextPage && (
+        <div className="text-center p-4 text-muted-foreground">
+          Loading more...
+        </div>
+      )}
     </div>
   );
 };

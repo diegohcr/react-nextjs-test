@@ -4,7 +4,9 @@ import PostList from '@/app/_components/PostList';
 export default function BlogPage() {
   return (
     <section>
-      <h2 className="text-2xl font-bold mb-4">Blog Posts</h2>
+      <header className="bg-blue-600 text-white p-4 text-center rounded-lg">
+        <h1 className="text-3xl font-bold">Blog Posts</h1>
+      </header>
       <PostList />
     </section>
   );
